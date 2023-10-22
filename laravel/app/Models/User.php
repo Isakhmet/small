@@ -45,6 +45,6 @@ class User extends Authenticatable
 
     public function isManager(): bool
     {
-        return false;
+        return $this->email === 'manager@example.com';
     }
 }
