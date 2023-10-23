@@ -18,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'feedback', 'middleware' => ['auth:sanctum']], function () {
     Route::get('get', [FeedbackController::class, 'getFeedback']);
     Route::post('create', [FeedbackController::class, 'createFeedback']);
+    Route::put('update', [FeedbackController::class, 'updateFeedback']);
 });

@@ -20,10 +20,16 @@ class FeedbackRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required|string',
-            'message' => 'required|string',
-            'category' => 'required|string',
-        ];
+        return match ($this->method()) {
+            'POST' => [
+                'title' => 'required|string',
+                'message' => 'required|string',
+                'category' => 'required|string',
+            ],
+            'PUT' => [
+                'id' => 'required|exists:feedback,id',
+                'answer' => 'required|string'
+            ]
+        };
     }
 }
