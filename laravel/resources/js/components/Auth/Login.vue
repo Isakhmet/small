@@ -3,7 +3,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <h1>{{authorize}}</h1>
                     <div class="card-header">Login</div>
                     <div class="card-body">
                         <div class="row mb-3">
