@@ -3,6 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
+                    <h1>{{authorize}}</h1>
                     <div class="card-header">Login</div>
                     <div class="card-body">
                         <div class="row mb-3">
@@ -10,7 +11,7 @@
 
                             <div class="col-md-6">
                                 <input v-model="email" id="email" type="email"
-                                       class="form-control @error('email')  @enderror" name="email"
+                                       class="form-control" name="email"
                                        autocomplete="email" autofocus>
 
                                 <span v-if="email" class="invalid-feedback" role="alert">
@@ -23,7 +24,7 @@
 
                             <div class="col-md-6">
                                 <input v-model="password" id="password" type="password"
-                                       class="form-control  @enderror" name="password"
+                                       class="form-control" name="password"
                                        autocomplete="current-password">
 
                                 <span v-if="email" class="invalid-feedback" role="alert">
@@ -53,7 +54,7 @@ export default {
     name: "Login",
 
     computed: {
-        ...mapState('auth', ["email", "password"]),
+        ...mapState('auth', ["email", "password", "authorize"]),
         email: {
             get() {
                 return this.$store.state.auth.email;
