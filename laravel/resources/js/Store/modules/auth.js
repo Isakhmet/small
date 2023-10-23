@@ -9,11 +9,7 @@ export default {
         password: '',
         passwordConfirmation: '',
         user: {},
-        authorize: true
-    },
-
-    getters: {
-      data: state => state.data,
+        authorize: false
     },
 
     actions: {
@@ -24,8 +20,9 @@ export default {
                   password: state.password
               }).then(response => {
                   if (response.data.data) {
-                      commit('setUser', response.data.data)
+                      localStorage.setItem('token', response.config.headers['X_XSRF_TOKEN'])
                       commit('setAuthorize', true)
+                      commit('setUser', response.data.data)
                   }
 
                   router.push({name: 'feedback'});
@@ -43,10 +40,10 @@ export default {
                   password: state.password,
                   password_confirmation: state.passwordConfirmation,
               }).then(response => {
-                  console.log(response)
                   if (response.data.data) {
-                      commit('setUser', response.data.data)
+                      localStorage.setItem('token', response.config.headers['X_XSRF_TOKEN'])
                       commit('setAuthorize', true)
+                      commit('setUser', response.data.data)
                   }
 
                   router.push({name: 'feedback'});
@@ -58,13 +55,15 @@ export default {
 
       async logout({commit}) {
           axios.post('/logout').then(response => {
-              commit('setAuthorize', false)
-              commit('setUser', {})
-              console.log(response)
+              commit('setDefault')
+              localStorage.removeItem('token')
+              sessionStorage.clear();
+
+              router.push({name: 'login'});
           }).catch( err => {
               console.log(err)
           });
-      }
+      },
     },
 
     mutations: {
@@ -86,5 +85,13 @@ export default {
         setAuthorize(state, authorize) {
             state.authorize = authorize;
         },
+        setDefault(state) {
+            state.name = ''
+            state.email = ''
+            state.password = ''
+            state.passwordConfirmation = ''
+            state.user = {}
+            state.authorize = false;
+        }
     }
 }

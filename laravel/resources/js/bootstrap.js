@@ -13,6 +13,17 @@ window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
 
+window.axios.interceptors.response.use({}, error => {
+    if (error.response.status === 401 || error.response.status === 419) {
+        const  token = localStorage.getItem('token')
+
+        if(token) {
+            localStorage.removeItem('token')
+        }
+
+        this.$router.push({name: 'login'})
+    }
+})
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

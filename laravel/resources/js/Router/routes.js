@@ -1,20 +1,26 @@
 export const routes = [
     {
-        name: 'user.login',
-        path: '/user/login',
+        name: 'login',
+        path: '/login',
         meta: {requiresAuth: false},
         component: () => import('../components/Auth/Login.vue')
     },
     {
-        name: 'user.registration',
-        path: '/user/registration',
+        name: 'registration',
+        path: '/registration',
         meta: {requiresAuth: false},
         component: () => import('../components/Auth/Registration.vue')
     },
     {
         name: 'feedback',
         path: '/',
-        meta: {requiresAuth: false},
+        meta: {requiresAuth: true},
         component: () => import('../components/Feedback/Show.vue')
+    },
+    {
+        name: 'feedback.create',
+        path: '/create',
+        meta: {requiresAuth: true},
+        component: () => import('../components/Feedback/Create.vue')
     }
 ]
