@@ -24,6 +24,7 @@ class FeedbackResource extends JsonResource
             'file' => $this->path,
             'userName' => $this->user->name,
             'userEmail' => $this->user->email,
+            'createdAt' => $this->created_at->format('Y-m-d H:i:s')
         ];
     }
 }

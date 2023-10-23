@@ -39,6 +39,13 @@
                                 <input :value="item.answer" type="text" class="form-control" readonly>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-end">Created At</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" :value="item.createdAt" readonly>
+                            </div>
+                        </div>
                         <div v-if="auth.user?.isManager">
                             <div  class="row mb-3">
                                 <label class="col-md-4 col-form-label text-md-end">User name</label>
