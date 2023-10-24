@@ -37,14 +37,15 @@ services:
             - ./conf/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
             - ./conf/postgres-data:/var/lib/postgresql/data
 
-            #npm:
-        #image: "node:19-bullseye"
-        #user: "node"
-       # working_dir: /application
-        #environment:
-        #    - NODE_ENV=production
-        #volumes:
-        #    - ./laravel:/application
-        #ports:
-         #   - "3000:3000"
-        #command: ["npm", "run", "dev" ]
+
+    npm:
+        image: node:alpine
+        container_name: npm
+        volumes:
+            - ./laravel:/application
+        ports:
+            - 3000:3000
+            - 3001:3001
+        working_dir: /application
+        profiles: [ "npm" ]
+        entrypoint: [ 'npm' ]
